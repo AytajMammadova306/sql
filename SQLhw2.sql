@@ -47,6 +47,12 @@ INSERT INTO Products(Name,Price,Cost,[Product's Category]) VALUES
 INSERT INTO ProductColor (ProductId,ColorId) VALUES
 (1,2),(2,3),(2,4),(3,NUll)
 
+SELECT * FROM Products as p
+JOIN ProductColor as pc
+ON pc.ProductId=p.Id
+JOIN Colors as c
+ON c.id=pc.ColorId
+
 
 
 
