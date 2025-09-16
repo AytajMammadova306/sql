@@ -53,11 +53,13 @@ INSERT INTO ProductColor (ProductId,ColorId) VALUES
 (2,4),
 (3,NUll)
 
-SELECT * FROM Products as p
+SELECT p.Id, p.Name, Price, Cost, c.Name AS Color, ct.Name AS Category FROM Products as p
 JOIN ProductColor as pc
 ON pc.ProductId=p.Id
 LEFT JOIN Colors as c
 ON c.id=pc.ColorId
+JOIN Categories as ct
+ON ct.Id=p.[Product's Category]
 
 
 
@@ -98,6 +100,6 @@ INSERT INTO Users (Username,Password,RoleId) VALUES
 ('Someone3','123457as2',3),
 ('Someone4','123457as1',2)
 
-SELECT * FROM Users AS u
+SELECT u.Id, Username, Password, r.Name FROM Users AS u
 LEFT JOIN Roles AS r
 ON r.Id=u.RoleId
