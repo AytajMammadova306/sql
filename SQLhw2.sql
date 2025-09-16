@@ -1,6 +1,8 @@
 ﻿CREATE DATABASE Task2 
 USE Task2
 
+
+
 CREATE TABLE Products(
 Id INT PRIMARY KEY IDENTITY,
 Name NVARCHAR(25)NOT NULL,
@@ -54,9 +56,48 @@ INSERT INTO ProductColor (ProductId,ColorId) VALUES
 SELECT * FROM Products as p
 JOIN ProductColor as pc
 ON pc.ProductId=p.Id
-JOIN Colors as c
+LEFT JOIN Colors as c
 ON c.id=pc.ColorId
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE Users(
+Id INT PRIMARY KEY IDENTITY,
+Username VARCHAR(35) NOT NULL,
+[Password] CHAR(10) NOT NULL,
+[RoleId] INT FOREIGN KEY REFERENCES Roles(Id)
+)
+
+CREATE TABLE Roles(
+Id INT PRIMARY KEY IDENTITY,
+Name VARCHAR(40)
+)
+
+INSERT INTO Roles (Name) Values
+('Admin'),
+('CEO'),
+('Basic Worker')
+
+INSERT INTO Users (Username,Password,RoleId) VALUES 
+('Someone','123457asd',1),
+('Someone2','123457as3',3),
+('Someone3','123457as2',3),
+('Someone4','123457as1',2)
+
+SELECT * FROM Users AS u
+LEFT JOIN Roles AS r
+ON r.Id=u.RoleId
