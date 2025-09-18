@@ -10,7 +10,7 @@ INSERT INTO Genders(Name) VALUES
 ('Woman'),
 ('Man')
 
---not executed 
+
 CREATE TABLE Users(
 Id INT PRIMARY KEY IDENTITY,
 Name VARCHAR(50)NOT NULL,
@@ -34,8 +34,8 @@ Gender INT FOREIGN KEY REFERENCES Genders(Id)
 )
 
 INSERT INTO Artists (Name,Surname,Birthday,Gender) VALUES
-('someone','somebody',27-04-2007,1),
-('someone2','somebody2',20-09-1979,1)
+('someone','somebody','2007-04-27',1),
+('someone2','somebody2','1979-09-20',1)
 
 
 CREATE TABLE Categories(
@@ -64,7 +64,7 @@ INSERT INTO Music (Name, Duration,Category,Artist) VALUES
 
 
 CREATE TABLE Playlist (
-MusicId FOREIGN KEY REFERENCES Music(Id), 
-UserId FOREIGN KEY REFERENCES  Users(Id)
+MusicId INT FOREIGN KEY REFERENCES Music(Id), 
+UserId INT FOREIGN KEY REFERENCES  Users(Id)
 )
 
