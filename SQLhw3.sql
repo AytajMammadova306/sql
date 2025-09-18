@@ -20,7 +20,9 @@ Password VARCHAR(255) CHECK (LEN(Password)>8)NOT NULL,
 Gender INT FOREIGN KEY REFERENCES Genders(Id) NOT NULL
 )
 
-
+INSERT INTO Users (Name, Surname, Username,Password,Gender) VALUES
+('Test','Testov','Test12340','password1',1),
+('Test','Testov','Test12341','password2',2)
 
 
 CREATE TABLE Artist (
@@ -37,11 +39,24 @@ Id INT PRIMARY KEY IDENTITY,
 Name VARCHAR(50)NOT NULL UNIQUE,
 )
 
+INSERT INTO Categories (Name) VALUES
+('RnB'),
+('hiphop'),
+('retro')
+
 CREATE TABLE Music(
 Id INT PRIMARY KEY IDENTITY,
 Name VARCHAR(50)NOT NULL UNIQUE,
-Duration INT NOT NULL CHECK (Duration>0)
+Duration INT NOT NULL CHECK (Duration>0),
+Category INT FOREIGN KEY REFERENCES Categories(Id)
 )
+
+INSERT INTO Music (Name, Duration,Category) VALUES
+('music2',140,1),
+('music3',200,2),
+('music1',90,3)
+
+
 
 CREATE TABLE Playlist (
 MusicId FOREIGN KEY REFERENCES Music(Id), 
