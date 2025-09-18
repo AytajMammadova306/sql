@@ -25,13 +25,17 @@ INSERT INTO Users (Name, Surname, Username,Password,Gender) VALUES
 ('Test','Testov','Test12341','password2',2)
 
 
-CREATE TABLE Artist (
+CREATE TABLE Artists (
 Id INT PRIMARY KEY IDENTITY,
 Name VARCHAR(50)NOT NULL,
 Surname VARCHAR(50)NOT NULL,
 Birthday DATE NOT NULL,
 Gender INT FOREIGN KEY REFERENCES Genders(Id)
 )
+
+INSERT INTO Artists (Name,Surname,Birthday,Gender) VALUES
+('someone','somebody',27-04-2007,1),
+('someone2','somebody2',20-09-1979,1)
 
 
 CREATE TABLE Categories(
@@ -48,13 +52,14 @@ CREATE TABLE Music(
 Id INT PRIMARY KEY IDENTITY,
 Name VARCHAR(50)NOT NULL UNIQUE,
 Duration INT NOT NULL CHECK (Duration>0),
-Category INT FOREIGN KEY REFERENCES Categories(Id)
+Category INT FOREIGN KEY REFERENCES Categories(Id),
+Artist INT FOREIGN KEY REFERENCES Artists(Id)
 )
 
-INSERT INTO Music (Name, Duration,Category) VALUES
-('music2',140,1),
-('music3',200,2),
-('music1',90,3)
+INSERT INTO Music (Name, Duration,Category,Artist) VALUES
+('music2',140,1,1),
+('music3',200,2,1),
+('music1',90,3,2)
 
 
 
