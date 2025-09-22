@@ -172,7 +172,7 @@ ON a.id=Artist
 GROUP BY a.Name, a.Id
 HAVING COUNT(m.Id)=(SELECT MAX(songcount)FROM 
 (SELECT(COUNT(Id)) AS songcount FROM Music 
-GROUP BY Artist) 
+GROUP BY Artist) as counts
 )
 
 SELECT * FROM GetMostActive
