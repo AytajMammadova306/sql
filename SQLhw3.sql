@@ -162,3 +162,19 @@ AS
 SELECT Duration FROM Music
 
 SELECT * FROM Durations
+
+
+CREATE VIEW GetMostActive
+AS
+SELECT COUNT(m.Id) AS [Music Count], a.Name FROM Music as m
+JOIN Artists as a
+ON a.id=Artist
+GROUP BY a.Name, a.Id
+HAVING COUNT(m.Id)=(SELECT MAX(songcount)FROM 
+(SELECT(COUNT(Id)) AS songcount FROM Music 
+GROUP BY Artist) 
+)
+
+SELECT * FROM GetMostActive
+
+
