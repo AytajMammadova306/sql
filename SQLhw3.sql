@@ -94,3 +94,71 @@ EXEC usp_GetById 1
 
 SELECT * FROM About_Music
 
+
+CREATE PROCEDURE usp_CreateMusic @name VARCHAR(50) , 
+@duration INT , 
+@category INT , 
+@artistId INT
+AS
+INSERT INTO Music (Name, Duration,Category,Artist) VALUES
+(@name,@duration,@category,@artistId)
+
+EXEC usp_CreateMusic 'music10',270,2,2
+
+
+CREATE PROCEDURE usp_CreateUser @name VARCHAR(50), 
+@surname VARCHAR(50), 
+@username VARCHAR(255), 
+@password VARCHAR(255), 
+@gender INT
+AS
+SET @name=dbo.Capitalized(@name)
+SET @surname=dbo.Capitalized(@surname)
+INSERT INTO Users(Name,Surname,Username,Password,Gender) 
+VALUES(@name,@surname,@username,@password,@gender)
+
+
+CREATE FUNCTION Capitalized (@word VARCHAR(100))
+RETURNS VARCHAR(100)
+AS
+BEGIN
+SET @word=UPPER(LEFT(@word,1))+LOWER(SUBSTRING(@word,2,LEN(@word)-1))
+RETURN @word
+END
+
+
+CREATE PROCEDURE usp_CreateCategory @name VARCHAR(50)
+AS 
+INSERT INTO Categories (Name) VALUES(@name)
+
+EXEC usp_CreateCategory jazz
+EXEC usp_CreateMusic 'music15', 300,4,2
+EXEC usp_CreateUser 'someone44','someoneova','4444smonva','123459870',1
+
+select * from Categories
+select * from Artists
+select * from Users
+select * from Music
+select * from Playlist
+
+CREATE FUNCTION GetCountById (@id INT)
+RETURNS INT
+AS
+
+BEGIN
+DECLARE @count INT
+SELECT @count= COUNT(MusicId) FROM Playlist as p
+WHERE @id=p.UserId
+
+RETURN @count
+
+END
+
+SELECT dbo.GetCountById (2) as [Music Count]
+
+
+CREATE VIEW Durations
+AS
+SELECT Duration FROM Music
+
+SELECT * FROM Durations
