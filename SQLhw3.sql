@@ -178,3 +178,24 @@ GROUP BY Artist)
 SELECT * FROM GetMostActive
 
 
+ALTER TABLE Users 
+ADD IsDeleted BIT
+
+CREATE TRIGGER SoftDelete
+ON Users
+INSTEAD OF DELETE AS
+DECLARE @isdeleted BIT
+DECLARE @Id INT 
+SELECT Id=@id,IsDeleted=@isdeleted FROM DELETED 
+IF (@isdeleted=0)
+
+BEGIN
+	UPDATE Users SET IsDeleted=1 WHERE Id=@id
+
+END
+ELSE 
+BEGIN
+	DELETE FROM Users WHERE Id=@id
+
+END
+
