@@ -68,3 +68,29 @@ MusicId INT FOREIGN KEY REFERENCES Music(Id),
 UserId INT FOREIGN KEY REFERENCES  Users(Id)
 )
 
+
+
+INSERT INTO Playlist (MusicId, UserId)
+VALUES
+(1,2),
+(2,2),
+(1,1),
+(3,1)
+
+CREATE VIEW About_Music AS
+SELECT m.Name, m.Duration, m.Category, a.Name AS [Artist Name]
+FROM Music as m
+JOIN Artists as a
+ON a.Id=m.Artist
+
+CREATE PROCEDURE usp_GetById @userid INT AS
+SELECT m.Name
+FROM Music as m
+JOIN Playlist as p
+ON p.MusicId=m.Id
+WHERE p.UserId=@userid
+
+EXEC usp_GetById 1
+
+SELECT * FROM About_Music
+
